@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>糙會翻 - 完成</title>
+
+    <link rel="stylesheet" href="css/end.css">
+</head>
+
+<body>
+
+    <div class="endContainer">
+
+        <!-- 背景稻田 -->
+        <div class="bg"></div>
+
+        <!-- 主內容 -->
+        <div class="content">
+
+            <h1 class="title">🎉 太頂了！</h1>
+
+            <p class="subtitle">你成功認識了五種米</p>
+
+            <ul class="list">
+                <li>✔ 糙米</li>
+                <li>✔ 胚芽米</li>
+                <li>✔ 白米</li>
+                <li>✔ 圓糯米</li>
+                <li>✔ 黑糯米</li>
+            </ul>
+
+            <p class="thanks">感謝遊玩 🌾</p>
+
+            <div class="buttons">
+
+                <button onclick="restart()">再玩一次</button>
+                <button onclick="home()">回主畫面</button>
+
+            </div>
+
+        </div>
+
+        <!-- 稻穗動畫 -->
+        <div class="particles"></div>
+
+    </div>
+
+    <script>
+        function restart() {
+            window.location.href = "game.html";
+        }
+
+        function home() {
+            window.location.href = "index.html";
+        }
+    </script>
+
+</body>
+
+</html>

@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>糙會翻</title>
+
+    <link rel="stylesheet" href="css/game.css">
+
+</head>
+
+<body>
+
+    <!-- ======================
+         遊戲背景
+    ======================= -->
+
+    <div class="background">
+
+        <div class="sky"></div>
+
+        <div class="mountain"></div>
+
+        <div class="field"></div>
+
+    </div>
+
+    <!-- ======================
+         上方資訊列
+    ======================= -->
+
+    <header class="topBar">
+
+        <div class="timer">
+
+            ⏱
+
+            <span id="time">
+
+                60
+
+            </span>
+
+        </div>
+
+        <div class="progress">
+
+            已完成
+
+            <span id="matched">
+
+                0
+
+            </span>
+
+            /5
+
+        </div>
+
+        <button id="homeBtn">
+
+            🏠
+
+        </button>
+
+    </header>
+
+    <!-- ======================
+         卡牌區
+    ======================= -->
+
+    <main>
+
+        <section id="gameBoard">
+
+            <!-- JS自動建立卡牌 -->
+
+        </section>
+
+    </main>
+
+    <!-- ======================
+         下方工具列
+    ======================= -->
+
+    <footer>
+
+        <button id="hintBtn">
+
+            💡 提示
+
+            (<span id="hintCount">
+
+                3
+
+            </span>)
+
+        </button>
+
+    </footer>
+
+    <!-- ======================
+         米種介紹 Modal
+    ======================= -->
+
+    <div id="modal" class="hide">
+
+        <div class="modalContent">
+
+            <h2 id="riceTitle">
+
+                糙米
+
+            </h2>
+
+            <p id="riceIntro">
+
+                介紹文字
+
+            </p>
+
+            <button id="closeModal">
+
+                知道了
+
+            </button>
+
+        </div>
+
+    </div>
+
+    <!-- ======================
+         回首頁確認
+    ======================= -->
+
+    <div id="confirmBox" class="hide">
+
+        <div class="confirmContent">
+
+            <h2>
+
+                確定返回主畫面？
+
+            </h2>
+
+            <div class="confirmBtns">
+
+                <button id="cancelBtn">
+
+                    取消
+
+                </button>
+
+                <button id="confirmHome">
+
+                    返回
+
+                </button>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <script src="js/data.js"></script>
+
+    <script src="js/game.js"></script>
+
+</body>
+
+</html>

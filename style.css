@@ -1,0 +1,295 @@
+body {
+    margin: 0;
+    font-family: "Arial", "Noto Sans TC";
+    background: linear-gradient(#b7e4c7, #95d5b2);
+    overflow: hidden;
+}
+/* ===========================
+   基本設定
+=========================== */
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+body{
+
+    width:100vw;
+    height:100vh;
+
+    overflow:hidden;
+
+    font-family:"Microsoft JhengHei",sans-serif;
+
+}
+
+/* ===========================
+   背景
+=========================== */
+
+.background{
+
+    position:fixed;
+
+    inset:0;
+
+    z-index:-10;
+
+}
+
+/* 天空 */
+
+.sky{
+
+    position:absolute;
+
+    width:100%;
+    height:65%;
+
+    background:linear-gradient(
+
+        #8dd9ff,
+        #c8efff
+
+    );
+
+}
+
+/* 遠山 */
+
+.mountain{
+
+    position:absolute;
+
+    bottom:24%;
+
+    width:100%;
+    height:30%;
+
+    background:linear-gradient(
+
+        #6ea16d,
+        #4d7d4a
+
+    );
+
+    clip-path:polygon(
+
+    0 100%,
+    8% 60%,
+    18% 82%,
+    28% 45%,
+    42% 90%,
+    55% 38%,
+    68% 75%,
+    82% 42%,
+    100% 100%
+
+    );
+
+}
+
+/* 稻田 */
+
+.field{
+
+    position:absolute;
+
+    bottom:0;
+
+    width:100%;
+    height:30%;
+
+    background:#6fbf4b;
+
+}
+
+/* ===========================
+   白雲
+=========================== */
+
+.cloud{
+
+    position:absolute;
+
+    background:white;
+
+    border-radius:50px;
+
+    opacity:.9;
+
+    animation:moveCloud 35s linear infinite;
+
+}
+
+.cloud::before,
+.cloud::after{
+
+    content:"";
+
+    position:absolute;
+
+    background:white;
+
+    border-radius:50%;
+
+}
+
+.cloud1{
+
+    width:150px;
+    height:50px;
+
+    top:80px;
+
+    left:-180px;
+
+}
+
+.cloud1::before{
+
+    width:60px;
+    height:60px;
+
+    left:20px;
+    top:-20px;
+
+}
+
+.cloud1::after{
+
+    width:80px;
+    height:80px;
+
+    right:20px;
+    top:-30px;
+
+}
+
+.cloud2{
+
+    width:200px;
+    height:60px;
+
+    top:180px;
+
+    animation-duration:45s;
+
+    left:-250px;
+
+}
+
+.cloud2::before{
+
+    width:80px;
+    height:80px;
+
+    left:40px;
+    top:-30px;
+
+}
+
+.cloud2::after{
+
+    width:90px;
+    height:90px;
+
+    right:40px;
+    top:-35px;
+
+}
+
+@keyframes moveCloud{
+
+    from{
+
+        transform:translateX(0);
+
+    }
+
+    to{
+
+        transform:translateX(140vw);
+
+    }
+
+}
+
+/* ===========================
+   主選單
+=========================== */
+
+.menu{
+
+    width:480px;
+
+    background:rgba(255,255,255,.92);
+
+    padding:45px;
+
+    border-radius:30px;
+
+    text-align:center;
+
+    box-shadow:0 15px 30px rgba(0,0,0,.25);
+
+    position:absolute;
+
+    top:50%;
+    left:50%;
+
+    transform:translate(-50%,-50%);
+
+}
+
+.menu h1{
+
+    color:#2d6f38;
+
+    font-size:56px;
+
+    margin-bottom:20px;
+
+}
+
+.menu p{
+
+    font-size:24px;
+
+    color:#555;
+
+    line-height:1.7;
+
+    margin-bottom:40px;
+
+}
+
+button{
+
+    border:none;
+
+    cursor:pointer;
+
+    border-radius:15px;
+
+    padding:18px 50px;
+
+    background:#6fbf4b;
+
+    color:white;
+
+    font-size:28px;
+
+    transition:.3s;
+
+}
+
+button:hover{
+
+    transform:scale(1.08);
+
+    background:#56a73a;
+
+}

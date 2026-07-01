@@ -1,0 +1,690 @@
+/* ===========================================
+   糙會翻 - game.css
+   Part 1
+=========================================== */
+
+/* ---------- 全域 ---------- */
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+body{
+
+    font-family:"Microsoft JhengHei",sans-serif;
+
+    width:100vw;
+    height:100vh;
+
+    overflow:hidden;
+
+    background:#d8f3dc;
+
+}
+
+/* ---------- 背景 ---------- */
+
+.background{
+
+    position:fixed;
+
+    inset:0;
+
+    z-index:-10;
+
+}
+
+.sky{
+
+    height:65%;
+
+    background:linear-gradient(
+
+        #8dd9ff,
+        #c9f3ff
+
+    );
+
+}
+
+.mountain{
+
+    position:absolute;
+
+    bottom:25%;
+
+    width:100%;
+
+    height:25%;
+
+    background:#6a9f61;
+
+    clip-path:polygon(
+        0% 100%,
+        10% 55%,
+        20% 80%,
+        30% 40%,
+        45% 90%,
+        60% 45%,
+        75% 85%,
+        90% 50%,
+        100% 100%
+    );
+
+}
+
+.field{
+
+    position:absolute;
+
+    bottom:0;
+
+    width:100%;
+
+    height:30%;
+
+    background:#70bf4b;
+
+}
+
+/* ---------- 上方資訊 ---------- */
+
+.topBar{
+
+    width:100%;
+
+    height:90px;
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    padding:20px 50px;
+
+}
+
+.timer,
+.progress{
+
+    background:#fffef6;
+
+    padding:12px 30px;
+
+    border-radius:18px;
+
+    font-size:28px;
+
+    box-shadow:0 5px 15px rgba(0,0,0,.2);
+
+    color:#2f6c39;
+
+    font-weight:bold;
+
+}
+
+#homeBtn{
+
+    width:70px;
+
+    height:70px;
+
+    border:none;
+
+    border-radius:18px;
+
+    cursor:pointer;
+
+    background:#8b5e3c;
+
+    color:white;
+
+    font-size:28px;
+
+    transition:.25s;
+
+}
+
+#homeBtn:hover{
+
+    transform:scale(1.1);
+
+    background:#6f4729;
+
+}
+
+/* ---------- 卡牌區 ---------- */
+
+main{
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+}
+
+#gameBoard{
+
+    width:940px;
+
+    display:grid;
+
+    grid-template-columns:repeat(5,170px);
+
+    gap:20px;
+
+    justify-content:center;
+
+}
+
+/* ---------- 卡牌 ---------- */
+
+.card{
+
+    width:170px;
+
+    height:220px;
+
+    perspective:1000px;
+
+    cursor:pointer;
+
+}
+
+.card:hover{
+
+    transform:scale(1.05);
+
+}
+
+.cardInner{
+
+    width:100%;
+
+    height:100%;
+
+    position:relative;
+
+    transform-style:preserve-3d;
+
+    transition:.45s;
+
+}
+
+.card.flip .cardInner{
+
+    transform:rotateY(180deg);
+
+}
+
+/* ---------- 正反面 ---------- */
+
+.front,
+.back{
+
+    position:absolute;
+
+    width:100%;
+
+    height:100%;
+
+    border-radius:22px;
+
+    overflow:hidden;
+
+    backface-visibility:hidden;
+
+}
+
+/* 正面 */
+
+.front{
+
+    background:white;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    transform:rotateY(180deg);
+
+    box-shadow:0 10px 18px rgba(0,0,0,.2);
+
+}
+
+.front img{
+
+    width:90%;
+
+    height:90%;
+
+    object-fit:contain;
+
+}
+
+.front h2{
+
+    font-size:36px;
+
+    color:#2d6f38;
+
+}
+
+/* 背面 */
+
+.back{
+
+    background:linear-gradient(
+
+        #d7b26c,
+        #ba8c48
+
+    );
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    box-shadow:0 10px 18px rgba(0,0,0,.2);
+
+}
+
+.back::after{
+
+    content:"🌾";
+
+    font-size:64px;
+
+}
+/* ===========================================
+   Part 2
+   動畫、Modal、提示區
+=========================================== */
+
+/* ---------- 下方工具列 ---------- */
+
+footer{
+
+    width:100%;
+
+    position:absolute;
+
+    bottom:25px;
+
+    display:flex;
+
+    justify-content:center;
+
+}
+
+#hintBtn{
+
+    padding:15px 40px;
+
+    font-size:26px;
+
+    border:none;
+
+    border-radius:18px;
+
+    cursor:pointer;
+
+    background:#ffdf6b;
+
+    color:#5b4a00;
+
+    font-weight:bold;
+
+    box-shadow:0 6px 15px rgba(0,0,0,.2);
+
+    transition:.25s;
+
+}
+
+#hintBtn:hover{
+
+    transform:scale(1.08);
+
+}
+
+#hintBtn:disabled{
+
+    opacity:.5;
+
+    cursor:not-allowed;
+
+}
+
+/* ---------- 配對成功 ---------- */
+
+.card.matched{
+
+    animation:matchGlow .8s ease;
+
+}
+
+@keyframes matchGlow{
+
+    0%{
+
+        transform:scale(1);
+
+        filter:brightness(1);
+
+    }
+
+    40%{
+
+        transform:scale(1.15);
+
+        filter:
+
+            drop-shadow(0 0 10px gold)
+
+            drop-shadow(0 0 25px gold);
+
+    }
+
+    100%{
+
+        transform:scale(0);
+
+        opacity:0;
+
+    }
+
+}
+
+/* ---------- 配對失敗 ---------- */
+
+.card.wrong{
+
+    animation:shake .45s;
+
+}
+
+@keyframes shake{
+
+    0%{transform:translateX(0);}
+    20%{transform:translateX(-12px);}
+    40%{transform:translateX(12px);}
+    60%{transform:translateX(-10px);}
+    80%{transform:translateX(10px);}
+    100%{transform:translateX(0);}
+
+}
+
+/* ---------- Modal ---------- */
+
+#modal{
+
+    position:fixed;
+
+    inset:0;
+
+    background:rgba(0,0,0,.45);
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    z-index:100;
+
+}
+
+.modalContent{
+
+    width:650px;
+
+    background:#fffef8;
+
+    padding:40px;
+
+    border-radius:25px;
+
+    text-align:center;
+
+    box-shadow:0 15px 30px rgba(0,0,0,.3);
+
+    animation:popup .3s;
+
+}
+
+.modalContent h2{
+
+    color:#2d6f38;
+
+    font-size:40px;
+
+    margin-bottom:20px;
+
+}
+
+.modalContent p{
+
+    font-size:24px;
+
+    line-height:1.8;
+
+    color:#555;
+
+    margin-bottom:35px;
+
+}
+
+#closeModal{
+
+    border:none;
+
+    background:#5fa84b;
+
+    color:white;
+
+    padding:15px 35px;
+
+    border-radius:15px;
+
+    font-size:24px;
+
+    cursor:pointer;
+
+    transition:.25s;
+
+}
+
+#closeModal:hover{
+
+    transform:scale(1.05);
+
+}
+
+/* ---------- 回首頁確認 ---------- */
+
+#confirmBox{
+
+    position:fixed;
+
+    inset:0;
+
+    background:rgba(0,0,0,.45);
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    z-index:110;
+
+}
+
+.confirmContent{
+
+    width:480px;
+
+    background:white;
+
+    border-radius:25px;
+
+    padding:35px;
+
+    text-align:center;
+
+    animation:popup .25s;
+
+}
+
+.confirmContent h2{
+
+    margin-bottom:30px;
+
+    color:#2d6f38;
+
+}
+
+.confirmBtns{
+
+    display:flex;
+
+    justify-content:center;
+
+    gap:25px;
+
+}
+
+.confirmBtns button{
+
+    padding:14px 30px;
+
+    border:none;
+
+    border-radius:15px;
+
+    font-size:22px;
+
+    cursor:pointer;
+
+}
+
+#cancelBtn{
+
+    background:#cfcfcf;
+
+}
+
+#confirmHome{
+
+    background:#4caf50;
+
+    color:white;
+
+}
+
+/* ---------- 顯示控制 ---------- */
+
+.hide{
+
+    display:none !important;
+
+}
+
+/* ---------- Popup ---------- */
+
+@keyframes popup{
+
+    from{
+
+        transform:scale(.75);
+
+        opacity:0;
+
+    }
+
+    to{
+
+        transform:scale(1);
+
+        opacity:1;
+
+    }
+
+}
+
+/* ---------- Fade ---------- */
+
+.fadeOut{
+
+    animation:fadeOut .5s forwards;
+
+}
+
+@keyframes fadeOut{
+
+    to{
+
+        opacity:0;
+
+    }
+
+}
+
+/* ---------- 勝利金光 ---------- */
+
+@keyframes goldFlash{
+
+    0%{
+
+        box-shadow:0 0 0 gold;
+
+    }
+
+    50%{
+
+        box-shadow:
+
+            0 0 25px gold,
+
+            0 0 45px gold;
+
+    }
+
+    100%{
+
+        box-shadow:0 0 0 gold;
+
+    }
+
+}
+
+/* ---------- 響應式 ---------- */
+
+@media(max-width:1100px){
+
+    #gameBoard{
+
+        grid-template-columns:repeat(5,150px);
+
+        gap:15px;
+
+    }
+
+    .card{
+
+        width:150px;
+
+        height:200px;
+
+    }
+
+}
